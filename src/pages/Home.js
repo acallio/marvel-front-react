@@ -9,7 +9,7 @@ import Pagination from "../components/Pagination";
 import "./home.scss";
 
 const Home = () => {
-  // for character request
+  // for all characters request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 

@@ -9,7 +9,7 @@ import Pagination from "../components/Pagination";
 import "./comics.scss";
 
 const Comics = () => {
-  // for character request
+  // for comics request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
