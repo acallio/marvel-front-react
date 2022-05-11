@@ -22,9 +22,9 @@ const App = () => {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home axios={axios} />} />
-            <Route path="/" element={<Comics axios={axios} />} />
+            <Route path="/comics" element={<Comics axios={axios} />} />
             <Route
-              path="/"
+              path="/favorites"
               element={<Favorites axios={axios} cookies={cookies} />}
             />
           </Routes>

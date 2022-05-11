@@ -3,9 +3,18 @@ import { Link } from "react-router-dom";
 
 import "./contentCard.scss";
 
-// link is optional and is only for character cards (to link to comic)
-const ContentCard = ({ title, description, photo, link }) => {
-  return <div>ContentCard</div>;
+const ContentCard = ({ thumbnail, comics, _id, name, description }) => {
+  const { path, extension } = thumbnail;
+  return (
+    <div className="content-card">
+      <Link to={`/comics/:${comics}`}>
+        <h4>{name}</h4>
+
+        <img src={`${path}.${extension}`} alt="marvel hero" />
+        <p>{description}</p>
+      </Link>
+    </div>
+  );
 };
 
 export default ContentCard;
