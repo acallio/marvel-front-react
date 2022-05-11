@@ -9,7 +9,6 @@ import Favorites from "./pages/Favorites";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import axios from "axios";
 import cookies from "js-cookie";
 
 import "./App.scss";
@@ -21,11 +20,11 @@ const App = () => {
         <Header />
         <div className="container">
           <Routes>
-            <Route path="/" element={<Home axios={axios} />} />
-            <Route path="/comics" element={<Comics axios={axios} />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/comics" element={<Comics />} />
             <Route
               path="/favorites"
-              element={<Favorites axios={axios} cookies={cookies} />}
+              element={<Favorites cookies={cookies} />}
             />
           </Routes>
         </div>

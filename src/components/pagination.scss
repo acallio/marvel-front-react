@@ -1,11 +1,21 @@
 #pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 10px auto;
-  gap: 10px;
 
   .active {
     color: var(--marvel-red);
   }
+}
+
+.characters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.comics {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  gap: 5px;
 }

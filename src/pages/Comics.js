@@ -1,17 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import axios from "axios";
+
 import ContentCard from "../components/ContentCard";
+import Pagination from "../components/Pagination";
 
 import "./comics.scss";
 
-const Comics = ({ axios }) => {
+const Comics = () => {
   // for character request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
   //query filters
-  const [limitPerPage] = useState(50);
+  const [limitPerPage] = useState(100);
   const [skip, setSkip] = useState(0);
 
   //for search input filter
@@ -23,6 +26,7 @@ const Comics = ({ axios }) => {
       const response = await axios.get(
         `http://localhost:4000/comics${reqQueries}`
       );
+
       setData(response.data);
       setIsLoading(false);
     };
@@ -44,6 +48,13 @@ const Comics = ({ axios }) => {
               onChange={(event) => setSearch(event.target.value)}
             />
           </div>
+          <Pagination
+            search={search}
+            limitPerPage={limitPerPage}
+            count={data.count}
+            skip={skip}
+            setSkip={setSkip}
+          />
           <div className="comics-cards-holder">
             {data.results.map((comics) => {
               return <ContentCard key={comics._id} {...comics} />;

@@ -1,12 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import axios from "axios";
+
 import ContentCard from "../components/ContentCard";
 import Pagination from "../components/Pagination";
 
 import "./home.scss";
 
-const Home = ({ axios }) => {
+const Home = () => {
   // for character request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -50,6 +52,7 @@ const Home = ({ axios }) => {
             count={data.count}
             skip={skip}
             setSkip={setSkip}
+            characters={true}
           />
           <div className="character-cards-holder">
             {data.results.map((character) => {
