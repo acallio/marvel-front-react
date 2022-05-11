@@ -7,7 +7,7 @@ const ContentCard = ({ thumbnail, comics, _id, name, title, description }) => {
   const { path, extension } = thumbnail;
   return (
     <div className="content-card">
-      <Link to={`/comics/:${_id}`}>
+      <Link to={`/character/${_id}`}>
         <h4>{name ? name : title}</h4>
         <img src={`${path}.${extension}`} alt="marvel hero" />
         <p>{description}</p>

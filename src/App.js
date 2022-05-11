@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Comics from "./pages/Comics";
 import Favorites from "./pages/Favorites";
+import Character from "./pages/Character";
+import Comic from "./pages/Comic";
 
 //components
 import Header from "./components/Header";
@@ -21,7 +23,9 @@ const App = () => {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/character/:id" element={<Character />} />
             <Route path="/comics" element={<Comics />} />
+            <Route path="/comics/:id" element={<Comic />} />
             <Route
               path="/favorites"
               element={<Favorites cookies={cookies} />}

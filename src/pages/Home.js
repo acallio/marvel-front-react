@@ -26,7 +26,7 @@ const Home = () => {
       const response = await axios.get(
         `http://localhost:4000/characters${reqQueries}`
       );
-      console.log(response.data);
+
       setData(response.data);
       setIsLoading(false);
     };
