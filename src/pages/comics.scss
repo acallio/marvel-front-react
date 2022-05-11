@@ -1,0 +1,38 @@
+#comics {
+  .comics-cards-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px auto;
+  }
+
+  .comics-search-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .comics-search {
+    width: 50%;
+    outline: none;
+    border: none;
+    background-color: var(--marvel-red);
+    color: white;
+    height: 2rem;
+    padding: 10px;
+    border-radius: var(--btn-radius);
+  }
+  .comics-search::placeholder {
+    color: white;
+  }
+}
+
+@media (max-width: 800px) {
+  #home {
+    .comics-search {
+      width: 100%;
+    }
+  }
+}

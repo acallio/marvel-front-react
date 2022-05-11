@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import ContentCard from "../components/ContentCard";
+import Pagination from "../components/Pagination";
 
 import "./home.scss";
 
@@ -11,7 +12,7 @@ const Home = ({ axios }) => {
   const [data, setData] = useState([]);
 
   //query filters
-  const [limitPerPage] = useState(50);
+  const [limitPerPage] = useState(100);
   const [skip, setSkip] = useState(0);
 
   //for search input filter
@@ -23,6 +24,7 @@ const Home = ({ axios }) => {
       const response = await axios.get(
         `http://localhost:4000/characters${reqQueries}`
       );
+      console.log(response.data);
       setData(response.data);
       setIsLoading(false);
     };
@@ -42,8 +44,15 @@ const Home = ({ axios }) => {
               onChange={(event) => setSearch(event.target.value)}
             />
           </div>
+          <Pagination
+            search={search}
+            limitPerPage={limitPerPage}
+            count={data.count}
+            skip={skip}
+            setSkip={setSkip}
+          />
           <div className="character-cards-holder">
-            {data.results.map((character, index) => {
+            {data.results.map((character) => {
               return <ContentCard key={character._id} {...character} />;
             })}
           </div>

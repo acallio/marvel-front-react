@@ -1,0 +1,11 @@
+#pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  gap: 10px;
+
+  .active {
+    color: var(--marvel-red);
+  }
+}
