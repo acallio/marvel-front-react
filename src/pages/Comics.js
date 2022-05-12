@@ -8,7 +8,7 @@ import Pagination from "../components/Pagination";
 
 import "./comics.scss";
 
-const Comics = () => {
+const Comics = ({ isAuthenticated }) => {
   // for comics request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -30,14 +30,21 @@ const Comics = () => {
 
       setData(response.data);
 
-      const favResponse = await axios.get("http://localhost:4000/favorites");
+      if (isAuthenticated) {
+        const favResponse = await axios.get("http://localhost:4000/favorites", {
+          headers: {
+            authorization: `Bearer ${isAuthenticated}`,
+          },
+        });
 
-      setFavorites(favResponse.data);
+        setFavorites(favResponse.data);
+      }
 
       setIsLoading(false);
     };
+
     fetchData();
-  }, [limitPerPage, skip, search]);
+  }, [limitPerPage, skip, search, isAuthenticated]);
   return (
     // <div>
     //   List comics marvel par ordre alphabetique sous forme de fiche + barre de
@@ -69,6 +76,7 @@ const Comics = () => {
                   favorites={favorites}
                   setFavorites={setFavorites}
                   {...comics}
+                  isAuthenticated={isAuthenticated}
                 />
               );
             })}

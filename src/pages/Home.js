@@ -7,8 +7,8 @@ import ContentCard from "../components/ContentCard";
 import Pagination from "../components/Pagination";
 
 import "./home.scss";
-
-const Home = () => {
+//characters route
+const Home = ({ isAuthenticated }) => {
   // for all characters request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -29,15 +29,19 @@ const Home = () => {
       );
 
       setData(response.data);
+      if (isAuthenticated) {
+        const favResponse = await axios.get("http://localhost:4000/favorites", {
+          headers: {
+            authorization: `Bearer ${isAuthenticated}`,
+          },
+        });
 
-      const favResponse = await axios.get("http://localhost:4000/favorites");
-
-      setFavorites(favResponse.data);
-
+        setFavorites(favResponse.data);
+      }
       setIsLoading(false);
     };
     fetchData();
-  }, [limitPerPage, skip, search]);
+  }, [limitPerPage, skip, search, isAuthenticated]);
   // 100 personnages par page, avec barre de recherche de personnages,
   //           pagination possibilité de mettre en favoris
   return (
@@ -68,6 +72,7 @@ const Home = () => {
                   favorites={favorites}
                   setFavorites={setFavorites}
                   {...character}
+                  isAuthenticated={isAuthenticated}
                 />
               );
             })}

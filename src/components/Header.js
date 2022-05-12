@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+
 import logo from "../assets/img/logo-marvel.svg";
 
 import "./header.scss";
 
-const Header = () => {
+const Header = ({ isAuthenticated, setIsAuthenticated, Cookies }) => {
+  const navigate = useNavigate();
   return (
     <header>
       <div className="logo-holder">
@@ -24,6 +27,23 @@ const Header = () => {
           <li>
             <Link to="/favorites">Favorites</Link>
           </li>
+          {isAuthenticated ? (
+            <li>
+              <button
+                onClick={() => {
+                  Cookies.remove("authenticated");
+                  setIsAuthenticated(false);
+                  navigate("/");
+                }}
+              >
+                Take your leave
+              </button>
+            </li>
+          ) : (
+            <li>
+              <Link to="/login">Join the Avengers!</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

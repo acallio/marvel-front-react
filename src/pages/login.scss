@@ -1,0 +1,82 @@
+#login {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img  {
+    width: 50%;
+    object-fit: cover;
+  }
+
+  .form-holder {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .login-form {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 30px;
+      border: 1px solid black;
+      height: 500px;
+      box-shadow: 2px 2px 2px 2px black;
+
+      .presentation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        background-color: var(--marvel-red);
+        padding: 10px;
+        text-shadow: 2px 2px black;
+      }
+      .presentation > p {
+        color: white;
+      }
+
+      input {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid black;
+        border-radius: var(--btn-radius);
+        outline: none;
+      }
+
+      .submit-btn {
+        background-color: var(--marvel-red);
+        color: white;
+        padding: 10px;
+        border-radius: var(--btn-radius);
+        text-shadow: 2px 2px black;
+      }
+
+      .submit-btn:hover {
+        color: gold;
+      }
+    }
+
+    .already-member-btn {
+      margin: 20px 0;
+      text-shadow: 2px 2px black;
+      color: white;
+      padding: 10px;
+      background-color: var(--marvel-red);
+      border-radius: var(--btn-radius);
+    }
+
+    .already-member-btn:hover {
+      color: gold;
+    }
+
+    .login-form input::placeholder {
+      color: black;
+    }
+  }
+}

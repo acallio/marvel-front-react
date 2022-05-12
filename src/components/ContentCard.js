@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import fav from "../assets/img/favorite-avenger.svg";
 import "./contentCard.scss";
@@ -15,9 +15,11 @@ const ContentCard = ({
   description,
   favorites, // can be either characters of comics
   setFavorites, // can be either characters of comics
+  isAuthenticated,
 }) => {
   const { path, extension } = thumbnail;
 
+  const navigate = useNavigate();
   const decodeHtmlEntity = (str) => {
     return str.replace(/&#(\d+);/g, (match, dec) => {
       return String.fromCharCode(dec);
@@ -26,49 +28,64 @@ const ContentCard = ({
 
   const handleAddFavorite = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:4000/favorites/modify",
-        {
-          savedId: _id,
-          newName: `${name ? name : title}`,
-          type: comics && comics.length > 0 ? "character" : "comics",
-          image: { path: thumbnail.path, extension: thumbnail.extension },
-          description: description,
-          comics: `${name ? comics : []}`,
+      if (isAuthenticated) {
+        const response = await axios.post(
+          "http://localhost:4000/favorites/modify",
+          {
+            savedId: _id,
+            newName: `${name ? name : title}`,
+            type: comics && comics.length > 0 ? "character" : "comics",
+            image: { path: thumbnail.path, extension: thumbnail.extension },
+            description: description,
+            comics: `${name ? comics : []}`,
+          },
+          {
+            headers: {
+              authorization: `Bearer ${isAuthenticated}`,
+            },
+          }
+        );
+        if (response.data === "added") {
+          favorites
+            ? setFavorites((prevState) => [
+                ...prevState,
+                {
+                  newID: _id,
+                  newName: `${name ? name : title}`,
+                  type: comics && comics.length > 0 ? "character" : "comics",
+                  image: {
+                    path: thumbnail.path,
+                    extension: thumbnail.extension,
+                  },
+                  description: description,
+                  comics: `${name ? comics : []}`,
+                },
+              ])
+            : setFavorites([
+                {
+                  newID: _id,
+                  newName: `${name ? name : title}`,
+                  type: comics && comics.length > 0 ? "character" : "comics",
+                  image: {
+                    path: thumbnail.path,
+                    extension: thumbnail.extension,
+                  },
+                  description: description,
+                  comics: `${name ? comics : []}`,
+                },
+              ]);
+        } else if (response.data === "removed") {
+          if (favorites) {
+            const arr = [...favorites];
+            arr.splice(
+              arr.findIndex((fav) => fav.newID === _id),
+              1
+            );
+            setFavorites(arr);
+          }
         }
-      );
-      if (response.data === "added") {
-        favorites
-          ? setFavorites((prevState) => [
-              ...prevState,
-              {
-                newID: _id,
-                newName: `${name ? name : title}`,
-                type: comics && comics.length > 0 ? "character" : "comics",
-                image: { path: thumbnail.path, extension: thumbnail.extension },
-                description: description,
-                comics: `${name ? comics : []}`,
-              },
-            ])
-          : setFavorites([
-              {
-                newID: _id,
-                newName: `${name ? name : title}`,
-                type: comics && comics.length > 0 ? "character" : "comics",
-                image: { path: thumbnail.path, extension: thumbnail.extension },
-                description: description,
-                comics: `${name ? comics : []}`,
-              },
-            ]);
-      } else if (response.data === "removed") {
-        if (favorites) {
-          const arr = [...favorites];
-          arr.splice(
-            arr.findIndex((fav) => fav.newID === _id),
-            1
-          );
-          setFavorites(arr);
-        }
+      } else {
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
@@ -77,11 +94,13 @@ const ContentCard = ({
 
   const checkFavoriteIcon = () => {
     //if name props it's a character else it's a comics
-    const str =
-      favorites && favorites.findIndex((fav) => fav.newID === _id) !== -1
-        ? "favorite-active"
-        : "favorite-inactive";
-    return str;
+    if (isAuthenticated) {
+      const str =
+        favorites && favorites.findIndex((fav) => fav.newID === _id) !== -1
+          ? "favorite-active"
+          : "favorite-inactive";
+      return str;
+    } else return "favorite-inactive";
   };
   return (
     <div className="content-card">
