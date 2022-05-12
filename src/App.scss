@@ -48,6 +48,10 @@ input[type="reset"] {
   display: none;
 }
 
+.cursor-default {
+  cursor: default;
+}
+
 @media (max-width: 1200px) {
   .container {
     width: 100%;

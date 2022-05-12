@@ -71,7 +71,10 @@ const ContentCard = ({
         alt="favorite"
         onClick={handleAddFavorite}
       />
-      <Link to={`/character/${_id}`}>
+      <Link
+        to={name ? `/character/${_id}` : ""}
+        className={name ? "" : "cursor-default"}
+      >
         <img
           className="main-image"
           src={`${path}.${extension}`}

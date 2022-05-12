@@ -31,8 +31,11 @@ const Comics = () => {
       setData(response.data);
 
       const favResponse = await axios.get("http://localhost:4000/favorites");
-
-      setFavorites(favResponse.data);
+      const arr = [];
+      for (let i = 0; i < favResponse.data.length; i++) {
+        arr.push(favResponse.data[i].newID);
+      }
+      setFavorites(arr);
 
       setIsLoading(false);
     };
