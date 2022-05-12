@@ -8,10 +8,11 @@ import Pagination from "../components/Pagination";
 
 import "./home.scss";
 
-const Home = ({ favoriteCharacters, sertFavoriteCharacters }) => {
+const Home = () => {
   // for all characters request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [favorites, setFavorites] = useState();
 
   //query filters
   const [limitPerPage] = useState(100);
@@ -28,6 +29,14 @@ const Home = ({ favoriteCharacters, sertFavoriteCharacters }) => {
       );
 
       setData(response.data);
+
+      const favResponse = await axios.get("http://localhost:4000/favorites");
+      const arr = [];
+      for (let i = 0; i < favResponse.data.length; i++) {
+        arr.push(favResponse.data[i].newID);
+      }
+      setFavorites(arr);
+
       setIsLoading(false);
     };
     fetchData();
@@ -59,8 +68,8 @@ const Home = ({ favoriteCharacters, sertFavoriteCharacters }) => {
               return (
                 <ContentCard
                   key={character._id}
-                  favorites={favoriteCharacters}
-                  setFavorites={sertFavoriteCharacters}
+                  favorites={favorites}
+                  setFavorites={setFavorites}
                   {...character}
                 />
               );

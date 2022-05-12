@@ -1,8 +1,8 @@
 import React from "react";
 
 import "./favorites.scss";
-
-const Favorites = ({ axios, cookies }) => {
+//axios get favorites and then get them by id
+const Favorites = () => {
   return <div>Favorites</div>;
 };
 

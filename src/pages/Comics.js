@@ -8,10 +8,11 @@ import Pagination from "../components/Pagination";
 
 import "./comics.scss";
 
-const Comics = ({ favoriteComics, setFavoriteComics }) => {
+const Comics = () => {
   // for comics request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [favorites, setFavorites] = useState();
 
   //query filters
   const [limitPerPage] = useState(100);
@@ -28,6 +29,11 @@ const Comics = ({ favoriteComics, setFavoriteComics }) => {
       );
 
       setData(response.data);
+
+      const favResponse = await axios.get("http://localhost:4000/favorites");
+
+      setFavorites(favResponse.data);
+
       setIsLoading(false);
     };
     fetchData();
@@ -60,8 +66,8 @@ const Comics = ({ favoriteComics, setFavoriteComics }) => {
               return (
                 <ContentCard
                   key={comics._id}
-                  favorites={favoriteComics}
-                  setFavorites={setFavoriteComics}
+                  favorites={favorites}
+                  setFavorites={setFavorites}
                   {...comics}
                 />
               );
