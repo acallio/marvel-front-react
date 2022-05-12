@@ -8,7 +8,7 @@ import Pagination from "../components/Pagination";
 
 import "./home.scss";
 
-const Home = () => {
+const Home = ({ favoriteCharacters, sertFavoriteCharacters }) => {
   // for all characters request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -56,7 +56,14 @@ const Home = () => {
           />
           <div className="character-cards-holder">
             {data.results.map((character) => {
-              return <ContentCard key={character._id} {...character} />;
+              return (
+                <ContentCard
+                  key={character._id}
+                  favorites={favoriteCharacters}
+                  setFavorites={sertFavoriteCharacters}
+                  {...character}
+                />
+              );
             })}
           </div>
         </main>

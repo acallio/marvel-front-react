@@ -16,13 +16,13 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Personnages</Link>
+            <Link to="/">Characters</Link>
           </li>
           <li>
             <Link to="/comics">Comics</Link>
           </li>
           <li>
-            <Link to="/favorites">Favoris</Link>
+            <Link to="/favorites">Favorites</Link>
           </li>
         </ul>
       </nav>

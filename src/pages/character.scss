@@ -2,30 +2,79 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   .info {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 70%;
-    margin: 10px 20px;
+    margin: 0 20px;
+    margin-bottom: 30px;
   }
 
-  .info h4 {
+  .info-left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .info-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .info-left h4 {
     margin-bottom: 10px;
     font-size: 1.5rem;
   }
 
-  .info img {
-    width: 100%;
+  .info-left img {
+    width: 50%;
   }
-  .info p {
+  .info-right p {
     margin: 20px 0;
-    line-height: 1.5rem;
+    line-height: 2rem;
+  }
+
+  > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0 10px 0;
+    border-top: 3px solid var(--marvel-red);
   }
 
   .character-in-comics {
-    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+    margin: 10px auto;
+
+    .comic-holder {
+      width: 150px;
+      height: 250px;
+
+      h4 {
+        height: 50px;
+      }
+
+      .img-holder {
+        width: 100%;
+        height: calc((100% - 50px));
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
   }
 }

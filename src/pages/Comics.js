@@ -8,7 +8,7 @@ import Pagination from "../components/Pagination";
 
 import "./comics.scss";
 
-const Comics = () => {
+const Comics = ({ favoriteComics, setFavoriteComics }) => {
   // for comics request
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -44,7 +44,7 @@ const Comics = () => {
             <input
               className="comics-search"
               value={search}
-              placeholder="Rechercher un comics"
+              placeholder="Find a comics"
               onChange={(event) => setSearch(event.target.value)}
             />
           </div>
@@ -57,7 +57,14 @@ const Comics = () => {
           />
           <div className="comics-cards-holder">
             {data.results.map((comics) => {
-              return <ContentCard key={comics._id} {...comics} />;
+              return (
+                <ContentCard
+                  key={comics._id}
+                  favorites={favoriteComics}
+                  setFavorites={setFavoriteComics}
+                  {...comics}
+                />
+              );
             })}
           </div>
         </main>
