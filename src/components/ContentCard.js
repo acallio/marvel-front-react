@@ -8,7 +8,7 @@ import axios from "axios";
 
 const ContentCard = ({
   thumbnail,
-  // comics,
+  comics,
   _id,
   name,
   title,
@@ -30,19 +30,41 @@ const ContentCard = ({
         "http://localhost:4000/favorites/modify",
         {
           savedId: _id,
+          newName: `${name ? name : title}`,
+          type: comics && comics.length > 0 ? "character" : "comics",
+          image: { path: thumbnail.path, extension: thumbnail.extension },
+          description: description,
+          comics: `${name ? comics : []}`,
         }
       );
-
-      console.log(response.data);
       if (response.data === "added") {
         favorites
-          ? setFavorites((prevState) => [...prevState, _id])
-          : setFavorites([_id]);
+          ? setFavorites((prevState) => [
+              ...prevState,
+              {
+                newID: _id,
+                newName: `${name ? name : title}`,
+                type: comics && comics.length > 0 ? "character" : "comics",
+                image: { path: thumbnail.path, extension: thumbnail.extension },
+                description: description,
+                comics: `${name ? comics : []}`,
+              },
+            ])
+          : setFavorites([
+              {
+                newID: _id,
+                newName: `${name ? name : title}`,
+                type: comics && comics.length > 0 ? "character" : "comics",
+                image: { path: thumbnail.path, extension: thumbnail.extension },
+                description: description,
+                comics: `${name ? comics : []}`,
+              },
+            ]);
       } else if (response.data === "removed") {
         if (favorites) {
           const arr = [...favorites];
           arr.splice(
-            arr.findIndex((fav) => fav === _id),
+            arr.findIndex((fav) => fav.newID === _id),
             1
           );
           setFavorites(arr);
@@ -56,12 +78,11 @@ const ContentCard = ({
   const checkFavoriteIcon = () => {
     //if name props it's a character else it's a comics
     const str =
-      favorites && favorites.indexOf(_id) !== -1
+      favorites && favorites.findIndex((fav) => fav.newID === _id) !== -1
         ? "favorite-active"
         : "favorite-inactive";
     return str;
   };
-
   return (
     <div className="content-card">
       <h4>{name ? name : title && decodeHtmlEntity(title)}</h4>

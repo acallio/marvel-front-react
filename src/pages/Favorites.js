@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import ContentCard from "../components/ContentCard";
-import Pagination from "../components/Pagination";
 
 import "./favorites.scss";
 
@@ -13,58 +12,71 @@ import "./favorites.scss";
 const Favorites = () => {
   // for comics request
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+
   const [favorites, setFavorites] = useState();
 
-  //query filters
-  const [limitPerPage] = useState(100);
-  const [skip, setSkip] = useState(0);
+  const [characters, setCharacters] = useState();
+  const [comics, setComics] = useState();
 
-  //for search input filter
-  const [search, setSearch] = useState("");
-
+  //autre possibilité, quand j'ajoute un favori, j'aoute toutes ses données que je stock en DB
   useEffect(() => {
     const fetchData = async () => {
-      const reqQueries = `?limit=${limitPerPage}&skip=${skip}&title=${search}`;
-      const response = await axios.get(
-        `http://localhost:4000/comics${reqQueries}`
+      const favResponse = await axios.get("http://localhost:4000/favorites");
+      // return array of objects with newName, newID, type (comics, character)
+      setFavorites(favResponse.data);
+
+      const charArray = favResponse.data.filter(
+        (elem) => elem.type === "character"
       );
 
-      setData(response.data);
+      setCharacters(charArray);
 
-      const favResponse = await axios.get("http://localhost:4000/favorites");
-      const arr = [];
-      for (let i = 0; i < favResponse.data.length; i++) {
-        arr.push(favResponse.data[i].newID);
-      }
-      setFavorites(arr);
+      const comicsArray = favResponse.data.filter(
+        (elem) => elem.type === "comics"
+      );
+
+      setComics(comicsArray);
 
       setIsLoading(false);
     };
     fetchData();
-  }, [limitPerPage, skip]);
+  }, []);
   return (
     <>
       {isLoading ? null : (
         <main id="favorites">
-          <Pagination
-            search={search}
-            limitPerPage={limitPerPage}
-            count={data.count}
-            skip={skip}
-            setSkip={setSkip}
-          />
+          <div className="character-cards-holder">
+            {characters &&
+              characters.map((character) => {
+                return (
+                  <ContentCard
+                    key={character._id}
+                    favorites={favorites}
+                    setFavorites={setFavorites}
+                    comics={character.comics}
+                    description={character.description}
+                    thumbnail={character.image}
+                    _id={character.newID}
+                    name={character.newName}
+                  />
+                );
+              })}
+          </div>
           <div className="comics-cards-holder">
-            {data.results.map((comics) => {
-              return (
-                <ContentCard
-                  key={comics._id}
-                  favorites={favorites}
-                  setFavorites={setFavorites}
-                  {...comics}
-                />
-              );
-            })}
+            {comics &&
+              comics.map((comic) => {
+                return (
+                  <ContentCard
+                    key={comic._id}
+                    favorites={favorites}
+                    setFavorites={setFavorites}
+                    description={comic.description}
+                    thumbnail={comic.image}
+                    _id={comic.newID}
+                    title={comic.newName}
+                  />
+                );
+              })}
           </div>
         </main>
       )}

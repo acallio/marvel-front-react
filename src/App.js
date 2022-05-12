@@ -27,7 +27,6 @@ const App = () => {
         </div>
         <Footer title="Site réalisé par Adrien Callioni" />
       </Router>
-      )
     </div>
   );
 };

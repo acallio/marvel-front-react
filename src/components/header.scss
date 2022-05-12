@@ -1,11 +1,10 @@
 header {
-  height: 100px;
+  height: var(--header-height);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
   background-color: var(--marvel-red);
-  margin-bottom: 20px;
   padding-bottom: 20px;
 
   .logo-holder {
