@@ -25,6 +25,7 @@ const LoginForm = ({
       password: password,
     });
 
+    Cookies.remove("authenticated");
     Cookies.set("authenticated", response.data.token);
     setIsAuthenticated(response.data.token);
     navigate("/");
