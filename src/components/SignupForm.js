@@ -20,11 +20,14 @@ const SignupForm = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post("http://localhost:4000/signup", {
-      userName: userName,
-      email: email,
-      password: password,
-    });
+    const response = await axios.post(
+      "https://ac-marvel.herokuapp.com/signup",
+      {
+        userName: userName,
+        email: email,
+        password: password,
+      }
+    );
 
     Cookies.remove("authenticated");
     Cookies.set("authenticated", response.data.token);

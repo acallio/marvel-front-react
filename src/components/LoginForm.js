@@ -20,7 +20,7 @@ const LoginForm = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post("http://localhost:4000/login", {
+    const response = await axios.post("https://ac-marvel.herokuapp.com/login", {
       email: email,
       password: password,
     });

@@ -32,17 +32,20 @@ const Home = ({ isAuthenticated }) => {
       setBlankSpace("");
       const reqQueries = `?limit=${limitPerPage}&skip=${skip}&name=${search}`;
       const response = await axios.get(
-        `http://localhost:4000/characters${reqQueries}`
+        `https://ac-marvel.herokuapp.com/characters${reqQueries}`
       );
 
       setData(response.data);
 
       if (isAuthenticated) {
-        const favResponse = await axios.get("http://localhost:4000/favorites", {
-          headers: {
-            authorization: `Bearer ${isAuthenticated}`,
-          },
-        });
+        const favResponse = await axios.get(
+          "https://ac-marvel.herokuapp.com/favorites",
+          {
+            headers: {
+              authorization: `Bearer ${isAuthenticated}`,
+            },
+          }
+        );
 
         setFavorites(favResponse.data);
       }

@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
+import marvelComics from "../assets/img/marvel-comics.svg";
+
 import "./character.scss";
 
 const Character = () => {
@@ -17,7 +19,7 @@ const Character = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/comics/${id}` // finalement ça me renvoie bien les infos du comics
+          `https://ac-marvel.herokuapp.com/comics/${id}` // finalement ça me renvoie bien les infos du comics
         );
 
         setData(response.data);
@@ -54,12 +56,20 @@ const Character = () => {
             <div className="info-left">
               <h4>{data.name}</h4>
               <img
-                src={`${data.thumbnail.path}.${data.thumbnail.extension}`}
+                src={
+                  data.thumbnail.path.endsWith("image_not_available")
+                    ? marvelComics
+                    : `${data.thumbnail.path}.${data.thumbnail.extension}`
+                }
                 alt="marvel hero"
               />
             </div>
             <div className="info-right">
-              <p>{data.description}</p>
+              <p>
+                {data.description
+                  ? data.description
+                  : "No information found. This suspicious character is under investigation."}
+              </p>
             </div>
           </div>
           <p className="appears-in">Appears in:</p>
@@ -70,8 +80,14 @@ const Character = () => {
                   <h4>{data.comics[index].title}</h4>
                   <div className="img-holder">
                     <img
-                      src={`${data.comics[index].thumbnail.path}.${data.comics[index].thumbnail.extension}`}
-                      alt=""
+                      src={
+                        data.comics[index].thumbnail.path.endsWith(
+                          "image_not_available"
+                        )
+                          ? marvelComics
+                          : `${data.comics[index].thumbnail.path}.${data.comics[index].thumbnail.extension}`
+                      }
+                      alt="comics"
                     />
                   </div>
                 </div>

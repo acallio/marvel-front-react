@@ -31,7 +31,7 @@ const ContentCard = ({
     try {
       if (isAuthenticated) {
         const response = await axios.post(
-          "http://localhost:4000/favorites/modify",
+          "https://ac-marvel.herokuapp.com/favorites/modify",
           {
             savedId: _id,
             newName: `${name ? name : title}`,

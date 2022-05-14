@@ -24,11 +24,14 @@ const Favorites = ({ isAuthenticated }) => {
   //autre possibilité, quand j'ajoute un favori, j'aoute toutes ses données que je stock en DB
   useEffect(() => {
     const fetchData = async () => {
-      const favResponse = await axios.get("http://localhost:4000/favorites", {
-        headers: {
-          authorization: `Bearer ${isAuthenticated}`,
-        },
-      });
+      const favResponse = await axios.get(
+        "https://ac-marvel.herokuapp.com/favorites",
+        {
+          headers: {
+            authorization: `Bearer ${isAuthenticated}`,
+          },
+        }
+      );
       // return array of objects with newName, newID, type (comics, character)
       setFavorites(favResponse.data);
 
