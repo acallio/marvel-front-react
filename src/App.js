@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 //components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+// import ClickEffect from "./components/ClickEffect";
 
 import Cookies from "js-cookie";
 
@@ -21,8 +22,10 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
     Cookies.get("authenticated") || false
   );
+
   return (
     <div className="app">
+      {/* <ClickEffect /> */}
       <Router>
         <Header
           isAuthenticated={isAuthenticated}

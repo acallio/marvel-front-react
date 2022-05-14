@@ -14,11 +14,15 @@
 
   --header-height: 100px;
   --footer-height: 80px;
+
+  --mouse-x: 0px;
+  --mouse-y: 0px;
 }
 
 .app {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 button,
@@ -72,6 +76,7 @@ input[type="reset"] {
     border-radius: 50%;
   }
 }
+
 @media (max-width: 1200px) {
   .container {
     width: 100%;
