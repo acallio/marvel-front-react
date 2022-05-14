@@ -50,7 +50,6 @@ const Home = ({ isAuthenticated }) => {
       if (search !== "" && response.data.results.length > 0) {
         const targetAuto = response.data.results[0].name.split("");
         setBlankSpace(targetAuto.splice(0, search.length).join(""));
-
         setAutoComplete(targetAuto.join(""));
       } else setAutoComplete("");
 

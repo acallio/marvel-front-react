@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import fav from "../assets/img/favorite-avenger.svg";
+import marvelComics from "../assets/img/marvel-comics.svg";
 import "./contentCard.scss";
 
 import axios from "axios";
@@ -117,7 +118,11 @@ const ContentCard = ({
       >
         <img
           className="main-image"
-          src={`${path}.${extension}`}
+          src={
+            path.endsWith("image_not_available")
+              ? marvelComics
+              : `${path}.${extension}`
+          }
           alt="marvel hero"
         />
       </Link>
