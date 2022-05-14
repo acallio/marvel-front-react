@@ -37,7 +37,7 @@ const ContentCard = ({
             type: comics && comics.length > 0 ? "character" : "comics",
             image: { path: thumbnail.path, extension: thumbnail.extension },
             description: description,
-            comics: `${name ? comics : []}`,
+            comics: `${name}` ? comics : [],
           },
           {
             headers: {
@@ -58,7 +58,7 @@ const ContentCard = ({
                     extension: thumbnail.extension,
                   },
                   description: description,
-                  comics: `${name ? comics : []}`,
+                  comics: `${name}` ? comics : [], //${name ? comics : []}`,
                 },
               ])
             : setFavorites([
@@ -71,7 +71,7 @@ const ContentCard = ({
                     extension: thumbnail.extension,
                   },
                   description: description,
-                  comics: `${name ? comics : []}`,
+                  comics: `${name}` ? comics : [],
                 },
               ]);
         } else if (response.data === "removed") {

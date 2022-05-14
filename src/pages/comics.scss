@@ -18,16 +18,37 @@
 
   .comics-search {
     width: 50%;
-    outline: none;
-    border: none;
     background-color: var(--marvel-red);
-    color: white;
     height: 2rem;
     padding: 10px;
     border-radius: var(--btn-radius);
-  }
-  .comics-search::placeholder {
-    color: white;
+    position: relative;
+
+    .search {
+      background-color: var(--marvel-red);
+      outline: none;
+      border: none;
+      width: 100%;
+      font-size: 1rem;
+      color: white;
+    }
+    .search::placeholder {
+      color: white;
+    }
+    .autocomplete-holder {
+      position: absolute;
+      left: 15px;
+      top: 10px;
+    }
+    .blank-space {
+      font-size: 1rem;
+      visibility: hidden;
+    }
+
+    .autocomplete {
+      font-size: 1rem;
+      color: gainsboro;
+    }
   }
 }
 
