@@ -19,7 +19,7 @@ const Character = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://ac-marvel.herokuapp.com/comics/${id}` // finalement ça me renvoie bien les infos du comics
+          `https://ac-marvel.herokuapp.com/comics/${id}`
         );
 
         setData(response.data);

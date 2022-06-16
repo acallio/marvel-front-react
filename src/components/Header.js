@@ -4,10 +4,16 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../assets/img/logo-marvel.svg";
+import bars from "../assets/img/bars-solid.svg";
 
 import "./header.scss";
 
-const Header = ({ isAuthenticated, setIsAuthenticated, Cookies }) => {
+const Header = ({
+  isAuthenticated,
+  setIsAuthenticated,
+  Cookies,
+  setShowMobileNav,
+}) => {
   const navigate = useNavigate();
   return (
     <header>
@@ -16,6 +22,12 @@ const Header = ({ isAuthenticated, setIsAuthenticated, Cookies }) => {
           <img className="logo-img" src={logo} alt="marvel" />
         </Link>
       </div>
+      <button
+        className="open-mobile-nav"
+        onClick={() => setShowMobileNav((prevState) => !prevState)}
+      >
+        <img src={bars} alt="menu" />
+      </button>
       <nav>
         <ul>
           <li>
@@ -36,7 +48,7 @@ const Header = ({ isAuthenticated, setIsAuthenticated, Cookies }) => {
                   navigate("/");
                 }}
               >
-                Take your leave
+                Sign Out
               </button>
             </li>
           ) : (

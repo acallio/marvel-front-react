@@ -1,5 +1,6 @@
 #home {
   margin-top: 20px;
+
   .character-cards-holder {
     display: flex;
     justify-content: center;
@@ -22,6 +23,9 @@
     padding: 10px;
     border-radius: var(--btn-radius);
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .search {
       background-color: var(--marvel-red);
@@ -30,24 +34,23 @@
       width: 100%;
       font-size: 1rem;
       color: white;
+      ::placeholder {
+        color: white;
+      }
     }
-    .search::placeholder {
-      color: white;
-    }
-
     .autocomplete-holder {
       position: absolute;
-      left: 15px;
-      top: 10px;
-    }
-    .blank-space {
-      font-size: 1rem;
-      visibility: hidden;
-    }
+      left: 10px;
 
-    .autocomplete {
-      font-size: 1rem;
-      color: gainsboro;
+      .blank-space {
+        font-size: 1rem;
+        visibility: hidden;
+      }
+
+      .autocomplete {
+        font-size: 1rem;
+        color: gainsboro;
+      }
     }
   }
 }
@@ -55,7 +58,7 @@
 @media (max-width: 800px) {
   #home {
     .character-search {
-      width: 100%;
+      width: 90%;
     }
   }
 }
