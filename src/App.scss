@@ -52,6 +52,26 @@ input[type="reset"] {
   min-height: calc(100vh - var(--header-height) - var(--footer-height));
   margin: 0 auto;
   position: relative;
+  display: flex;
+  align-items: center;
+
+  .img-banner {
+    width: calc((100vw - 1200px) / 2);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    object-fit: cover;
+    z-index: -1;
+  }
+  .left-side {
+    object-position: 25%;
+    left: 0;
+  }
+
+  .right-side {
+    object-position: 50%;
+    right: 0;
+  }
 }
 
 .display-none {
@@ -81,5 +101,8 @@ input[type="reset"] {
 @media (max-width: 1200px) {
   .container {
     width: 100%;
+    .img-banner {
+      display: none;
+    }
   }
 }

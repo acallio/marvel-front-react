@@ -17,6 +17,9 @@ import MobileNav from "./components/MobileNav";
 
 import Cookies from "js-cookie";
 
+import bannerLeft from "../src/assets/img/marvel1.jpg";
+import bannerRight from "../src/assets/img/marvel2.jpg";
+
 import "./App.scss";
 
 //idée d'amélio ajouter des images sur les cotés.
@@ -49,6 +52,11 @@ const App = () => {
           setShowMobileNav={setShowMobileNav}
         />
         <div className="container">
+          <img
+            className="img-banner left-side"
+            src={bannerLeft}
+            alt="banner left"
+          />
           <Routes>
             <Route
               path="/"
@@ -74,6 +82,11 @@ const App = () => {
               }
             ></Route>
           </Routes>
+          <img
+            className="img-banner right-side"
+            src={bannerRight}
+            alt="banner right"
+          />
         </div>
         <Footer />
       </Router>

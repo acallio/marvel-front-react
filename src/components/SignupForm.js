@@ -11,6 +11,7 @@ const SignupForm = ({
   setEmail,
   password,
   setPassword,
+  login,
   setLogin,
   setIsAuthenticated,
   Cookies,
@@ -35,16 +36,16 @@ const SignupForm = ({
     navigate("/");
   };
   return (
-    <>
-      <div className="form-holder">
-        <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
-          <div className="presentation">
-            <p>Captain America wants you to join the battle against Hydra!</p>
-            <p>
-              Join us and you will be able to add characters and comics to your
-              favorites
-            </p>
-          </div>
+    <div className="form-holder">
+      <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+        <div className="presentation">
+          <p>Captain America wants you to join the battle against Hydra!</p>
+          <p>
+            Join us and you will be able to add characters and comics to your
+            favorites
+          </p>
+        </div>
+        <div className="input-holder">
           <input
             type="text"
             placeholder="superhero name"
@@ -69,18 +70,18 @@ const SignupForm = ({
               setPassword(e.target.value);
             }}
           />
-          <input className="submit-btn" type="submit" value="Register now!" />
-        </form>
-        <button
-          className="already-member-btn"
-          onClick={() => {
-            setLogin((prevState) => !prevState);
-          }}
-        >
-          Already a member ? Log in!
-        </button>
-      </div>
-    </>
+        </div>
+        <input className="submit-btn" type="submit" value="Register now!" />
+      </form>
+      <button
+        className="already-member-btn"
+        onClick={() => {
+          setLogin((prevState) => !prevState);
+        }}
+      >
+        {login ? <>Not a member ? Join us!</> : <>Already a member ? Log in!</>}
+      </button>
+    </div>
   );
 };
 

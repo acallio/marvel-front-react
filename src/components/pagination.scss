@@ -1,6 +1,7 @@
 #pagination {
-  margin: 10px auto;
-
+  padding: 10px;
+  max-width: 80%;
+  margin: 0 auto;
   .active {
     color: var(--marvel-red);
   }

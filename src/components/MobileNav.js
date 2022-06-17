@@ -41,23 +41,27 @@ const MobileNav = ({
                   <img src={closeNavIcon} alt="close" />
                 </button>
               </li>
-              <li className={location.pathname === "/" && "selected"}>
+              <li className={location.pathname === "/" ? "selected" : ""}>
                 <button onClick={() => closeModalAndNavigate("/")}>
                   <img src={charactersIcon} alt="characters" />
                 </button>
               </li>
-              <li className={location.pathname === "/comics" && "selected"}>
+              <li className={location.pathname === "/comics" ? "selected" : ""}>
                 <button onClick={() => closeModalAndNavigate("/comics")}>
                   <img src={comicsIcon} alt="comics" />
                 </button>
               </li>
-              <li className={location.pathname === "/favorites" && "selected"}>
+              <li
+                className={location.pathname === "/favorites" ? "selected" : ""}
+              >
                 <button onClick={() => closeModalAndNavigate("/favorites")}>
                   <img src={favoritesIcon} alt="favorites" />
                 </button>
               </li>
               {isAuthenticated ? (
-                <li className={location.pathname === "/login" && "selected"}>
+                <li
+                  className={location.pathname === "/login" ? "selected" : ""}
+                >
                   <button
                     onClick={() => {
                       Cookies.remove("authenticated");
@@ -69,7 +73,9 @@ const MobileNav = ({
                   </button>
                 </li>
               ) : (
-                <li className={location.pathname === "/login" && "selected"}>
+                <li
+                  className={location.pathname === "/login" ? "selected" : ""}
+                >
                   <button onClick={() => closeModalAndNavigate("/login")}>
                     <img src={joinIcon} alt="join" />
                   </button>

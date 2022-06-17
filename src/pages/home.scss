@@ -1,5 +1,6 @@
 #home {
-  margin-top: 20px;
+  padding-top: 20px;
+  width: 100%;
 
   .character-cards-holder {
     display: flex;
@@ -14,42 +15,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
 
-  .character-search {
-    width: 50%;
-    background-color: var(--marvel-red);
-    height: 2rem;
-    padding: 10px;
-    border-radius: var(--btn-radius);
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .search {
+    .character-search {
+      width: 50%;
       background-color: var(--marvel-red);
-      outline: none;
-      border: none;
-      width: 100%;
-      font-size: 1rem;
-      color: white;
-      ::placeholder {
+      height: 2rem;
+      padding: 10px;
+      border-radius: var(--btn-radius);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .search {
+        background-color: var(--marvel-red);
+        outline: none;
+        border: none;
+        width: 100%;
+        font-size: 1rem;
         color: white;
+        ::placeholder {
+          color: white;
+        }
       }
-    }
-    .autocomplete-holder {
-      position: absolute;
-      left: 10px;
+      .autocomplete-holder {
+        position: absolute;
+        left: 10px;
 
-      .blank-space {
-        font-size: 1rem;
-        visibility: hidden;
-      }
+        .blank-space {
+          font-size: 1rem;
+          visibility: hidden;
+        }
 
-      .autocomplete {
-        font-size: 1rem;
-        color: gainsboro;
+        .autocomplete {
+          font-size: 1rem;
+          color: gainsboro;
+        }
       }
     }
   }
@@ -57,8 +58,10 @@
 
 @media (max-width: 800px) {
   #home {
-    .character-search {
-      width: 90%;
+    .character-search-holder {
+      .character-search {
+        width: 90%;
+      }
     }
   }
 }

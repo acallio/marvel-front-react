@@ -20,32 +20,32 @@ const Login = ({ isAuthenticated, setIsAuthenticated, Cookies }) => {
     <>
       {!isAuthenticated ? (
         <main id="login">
-          <img src={wantYou} alt="join us!" />
-          <>
-            {login ? (
-              <LoginForm
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
-                setLogin={setLogin}
-                setIsAuthenticated={setIsAuthenticated}
-                Cookies={Cookies}
-              />
-            ) : (
-              <SignupForm
-                userName={userName}
-                setUserName={setUserName}
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
-                setLogin={setLogin}
-                setIsAuthenticated={setIsAuthenticated}
-                Cookies={Cookies}
-              />
-            )}
-          </>
+          <img className="login-image" src={wantYou} alt="join us!" />
+          {login ? (
+            <LoginForm
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              setLogin={setLogin}
+              setIsAuthenticated={setIsAuthenticated}
+              Cookies={Cookies}
+              login={login}
+            />
+          ) : (
+            <SignupForm
+              userName={userName}
+              setUserName={setUserName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              setLogin={setLogin}
+              setIsAuthenticated={setIsAuthenticated}
+              Cookies={Cookies}
+              login={login}
+            />
+          )}
         </main>
       ) : (
         navigate("/")
