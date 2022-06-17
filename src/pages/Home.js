@@ -30,7 +30,8 @@ const Home = ({ isAuthenticated }) => {
     const fetchData = async () => {
       setAutoComplete("");
       setBlankSpace("");
-      const reqQueries = `?limit=${limitPerPage}&skip=${skip}&name=${search}`;
+      const trimmedSearch = search.slice().split("(")[0];
+      const reqQueries = `?limit=${limitPerPage}&skip=${skip}&name=${trimmedSearch}`;
       const response = await axios.get(
         `https://ac-marvel.herokuapp.com/characters${reqQueries}`
       );
@@ -50,7 +51,7 @@ const Home = ({ isAuthenticated }) => {
         setFavorites(favResponse.data);
       }
 
-      if (search !== "" && response.data.results.length > 0) {
+      if (search !== "" && response.data?.results?.length > 0) {
         const targetAuto = response.data.results[0].name.split("");
         setBlankSpace(targetAuto.splice(0, search.length).join(""));
         setAutoComplete(targetAuto.join(""));
@@ -99,7 +100,7 @@ const Home = ({ isAuthenticated }) => {
             characters={true}
           />
           <div className="character-cards-holder">
-            {data.results.map((character) => {
+            {data?.results?.map((character) => {
               return (
                 <ContentCard
                   key={character._id}

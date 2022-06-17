@@ -20,7 +20,7 @@ const MobileNav = ({
   const location = useLocation();
 
   if (showMobileNav) document.body.style.overflow = "hidden";
-  else document.body.style.overflow = "scroll";
+  else document.body.style.overflow = "initial";
 
   const closeModalAndNavigate = (path) => {
     setShowMobileNav(false);

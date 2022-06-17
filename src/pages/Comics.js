@@ -30,7 +30,9 @@ const Comics = ({ isAuthenticated }) => {
     const fetchData = async () => {
       setAutoComplete("");
       setBlankSpace("");
-      const reqQueries = `?limit=${limitPerPage}&skip=${skip}&title=${search}`;
+      const trimmedSearch = search.slice().split("(")[0];
+
+      const reqQueries = `?limit=${limitPerPage}&skip=${skip}&title=${trimmedSearch}`;
       const response = await axios.get(
         `https://ac-marvel.herokuapp.com/comics${reqQueries}`
       );
